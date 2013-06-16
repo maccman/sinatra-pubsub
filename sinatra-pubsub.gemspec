@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Sinatra::PubSub::VERSION
   spec.authors       = ["Alex MacCaw"]
   spec.email         = ["alex@alexmaccaw.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = ""
+  spec.description   = %q{Server Sent Events for Sinatra}
+  spec.summary       = %q{Sinatra PubSub}
+  spec.homepage      = "http://github.com/maccman/sinatra-pubsub"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
