@@ -1,6 +1,32 @@
-# Sinatra::Pubsub
+# Sinatra::PubSub
 
-TODO: Write a gem description
+PubSub is a little extension to Sinatra that adds basic publish/subscribe streaming
+using HTML5 Server Sent Events.
+
+For example, clients can subscribe to events like this:
+
+    var es = new EventSource('/subscribe');
+    es.onmessage = function(e) {
+      console.log(JSON.parse(e.data));
+    };
+
+And then you can broadcast events to them like this:
+
+    Sinatra::PubSub.publish_all(type: 'tick')
+
+You can subscribe to specific channels:
+
+    var es = new EventSource('/subscribe/sites/123');
+
+And publish to them:
+
+    Sinatra::PubSub.publish_all('sites/123', data: 'hi')
+
+## Requirements
+
+* An evented server, such as Thin
+* Redis
+* Sinatra
 
 ## Installation
 
@@ -18,7 +44,18 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Include it in your Sinatra application like so:
+
+    require 'sinatra/pubsub'
+    register Sinatra::PubSub
+
+This creates a `/subscribe/*` endpoint, which clients can use with `EventSource`.
+
+You can publish to channels using the `Sinatra::PubSub.publish_all(msg)` or
+`Sinatra::publish(channel, msg)` methods.
+
+Messages will be automatically serialized to JSON - you'll need to parse them on the client.
+See the `./examples` dir for more use-cases.
 
 ## Contributing
 
