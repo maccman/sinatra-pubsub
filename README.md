@@ -20,7 +20,7 @@ You can subscribe to specific channels:
 
 And publish to them:
 
-    Sinatra::PubSub.publish_all('sites/123', data: 'hi')
+    Sinatra::PubSub.publish('sites/123', data: 'hi')
 
 ## Requirements
 
