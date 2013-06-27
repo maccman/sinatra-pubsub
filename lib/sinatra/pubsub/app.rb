@@ -5,7 +5,7 @@ module Sinatra
         error 402 unless Stream.enabled?
 
         stream :keep_open do |out|
-          stream  = Stream.new(out)
+          stream = Stream.new(out)
 
           if channels = params[:splat]
             stream.subscribe(channels.join('/'))

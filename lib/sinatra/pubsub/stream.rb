@@ -34,14 +34,18 @@ module Sinatra
       attr_reader :out, :id
 
       def initialize(out)
-        @id       = SecureRandom.uuid
-        @out      = out
+        @id  = SecureRandom.uuid
+        @out = out
 
         subscribe :all
 
-        @timer = EventMachine::PeriodicTimer.new(
-          20, method(:keepalive)
-        )
+        @timer = true
+        Thread.new do
+          while @timer
+            sleep 20
+            keepalive
+          end
+        end
 
         setup
       end
@@ -51,7 +55,7 @@ module Sinatra
       end
 
       def close!
-        @timer.cancel
+        @timer = false
 
         self.class.streams.each do |channel, streams|
           streams.delete(self)

@@ -19,10 +19,8 @@ module Sinatra
           Process.kill('INT', $$)
         end
 
-        EM::next_tick do
-          Thread.new do
-            Redis.subscribe
-          end
+        Thread.new do
+          Redis.subscribe
         end
       end
     end
