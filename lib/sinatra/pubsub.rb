@@ -2,6 +2,7 @@ require 'sinatra/pubsub/version'
 
 module Sinatra
   module PubSub
+    autoload :Hijack, 'sinatra/pubsub/hijack'
     autoload :Stream, 'sinatra/pubsub/stream'
     autoload :Redis, 'sinatra/pubsub/redis'
     autoload :App, 'sinatra/pubsub/app'

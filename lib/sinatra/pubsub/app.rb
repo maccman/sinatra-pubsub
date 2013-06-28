@@ -1,6 +1,8 @@
 module Sinatra
   module PubSub
     class App < Sinatra::Base
+      use Hijack
+
       get '/subscribe/?*', :provides => 'text/event-stream' do
         error 402 unless Stream.enabled?
 

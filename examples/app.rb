@@ -3,11 +3,18 @@ require 'sinatra/pubsub'
 
 register Sinatra::PubSub
 
-EventMachine.next_tick do
-  EventMachine::PeriodicTimer.new(1) do
+Thread.new do
+  loop do
+    sleep 1
     Sinatra::PubSub.publish_all(type: 'tick')
   end
 end
+
+# EventMachine.next_tick do
+#   EventMachine::PeriodicTimer.new(1) do
+#     Sinatra::PubSub.publish_all(type: 'tick')
+#   end
+# end
 
 get '/' do
   erb :stream
