@@ -13,7 +13,7 @@ module Sinatra
       end
 
       before do
-        return unless cors
+        return unless settings.cors
 
         origin = http_origin || ''
         secure = origin =~ /\Ahttps/
