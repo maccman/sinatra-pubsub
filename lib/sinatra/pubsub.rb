@@ -14,5 +14,9 @@ module Sinatra
       app.helpers Helpers
       subscribe
     end
+
+    def self.set(*args)
+      App.set(*args)
+    end
   end
 end
