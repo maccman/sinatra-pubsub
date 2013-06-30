@@ -12,7 +12,7 @@ module Sinatra
         end
       end
 
-      before do
+      before '/subscribe/?*' do
         return unless settings.cors
 
         origin = http_origin || ''
