@@ -3,8 +3,6 @@ require 'sinatra/pubsub'
 
 register Sinatra::PubSub
 
-Sinatra::PubSub.set(cors: true)
-
 EventMachine.next_tick do
   EventMachine::PeriodicTimer.new(1) do
     Sinatra::PubSub.publish_all(type: 'tick')

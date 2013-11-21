@@ -2,7 +2,7 @@ module Sinatra
   module PubSub
     class App < Sinatra::Base
       configure do
-        set :cors, false
+        set :cors, true
         set :origin, '*'
       end
 
