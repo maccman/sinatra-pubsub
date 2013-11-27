@@ -24,7 +24,7 @@ And publish to them:
 
 ## Requirements
 
-* An evented server, such as Thin
+* Thin
 * Redis
 * Sinatra
 
@@ -57,10 +57,39 @@ You can publish to channels using the `Sinatra::PubSub.publish_all(msg)` or
 Messages will be automatically serialized to JSON - you'll need to parse them on the client.
 See the `./examples` dir for more use-cases.
 
-## Contributing
+## Herkou 123
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
+It's often a good idea to create a separate streaming server on a subdomain, rather than
+using your main application server for streaming. This gives you a bit more flexibility, like
+letting you use a Unicorn for your application server, and Thin for your streaming server.
+This is a quick guide to creating exactly that on Heroku.
+
+First create your streaming server from the 'basic' example.
+
+    git clone https://github.com/maccman/sinatra-pubsub.git
+    cp -r sinatra-pubsub/examples/basic myapp-stream
+    cd myapp-stream
+    bundle install
+    heroku create myapp-stream
+    git push heroku master
+
+Now the server is deployed, you need to setup Redis. If you already have Redis running
+on your main application server, just run:
+
+    heroku config -a myapp | grep REDIS
+    heroku config:set REDIS_URL=YOUR_REDIS_URL -a myapp-stream
+
+Otherwise install the Redis To Go addon:
+
+    heroku addons:add redis:basic -a myapp-stream
+
+And you're finished! You can subscribe to a channel from any browser like this:
+
+    var es = new EventSource('http://myapp-stream.herokuapp.com/subscribe');
+    es.onmessage = function(e) {
+      console.log(JSON.parse(e.data));
+    };
+
+And publish to the stream from any Ruby client connected to the same Redis server:
+
+    Sinatra::PubSub.publish_all('Hello World')

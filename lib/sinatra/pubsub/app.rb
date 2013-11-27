@@ -4,6 +4,7 @@ module Sinatra
       configure do
         set :cors, true
         set :origin, '*'
+        set :server, 'thin'
       end
 
       helpers do
@@ -19,7 +20,7 @@ module Sinatra
         secure = origin =~ /\Ahttps/
 
         allow  = settings.origin
-        allow.gsub!(/\Ahttp:\/\//, 'https://') if secure
+        allow  = allow.gsub(/\Ahttp:\/\//, 'https://') if secure
 
         headers['Access-Control-Allow-Origin']      = allow
         headers['Access-Control-Allow-Methods']     = 'GET'
@@ -30,7 +31,7 @@ module Sinatra
         error 402 unless Stream.enabled?
 
         stream :keep_open do |out|
-          stream  = Stream.new(out)
+          stream = Stream.new(out)
 
           if channels = params[:splat]
             stream.subscribe(channels.join('/'))
