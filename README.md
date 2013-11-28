@@ -22,6 +22,12 @@ And publish to them:
 
     Sinatra::PubSub.publish('sites/123', data: 'hi')
 
+## Demo
+
+You can find a simple demo on Heroku, which streams a 'tick' every second to your browser.
+
+http://sinatra-pubsub-tick.herokuapp.com
+
 ## Requirements
 
 * Thin
@@ -82,7 +88,7 @@ on your main application server, just run:
     heroku config -a myapp-stream | grep REDIS
     heroku config:set REDIS_URL=YOUR_REDIS_URL -a myapp-stream
 
-Otherwise install the Redis To Go addon:
+Otherwise install the RedisCloud addon:
 
     heroku addons:add rediscloud -a myapp-stream
     heroku config -a myapp-stream | grep REDIS
