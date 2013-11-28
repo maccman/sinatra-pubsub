@@ -63,7 +63,7 @@ You can publish to channels using the `Sinatra::PubSub.publish_all(msg)` or
 Messages will be automatically serialized to JSON - you'll need to parse them on the client.
 See the `./examples` dir for more use-cases.
 
-## Herkou 123
+## Heroku 123
 
 It's often a good idea to create a separate streaming server on a subdomain, rather than
 using your main application server for streaming. This gives you a bit more flexibility, like
