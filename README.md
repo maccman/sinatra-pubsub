@@ -70,18 +70,23 @@ First create your streaming server from the 'basic' example.
     cp -r sinatra-pubsub/examples/basic myapp-stream
     cd myapp-stream
     bundle install
+    git init
+    git add .
+    git commit -m 'first commit'
     heroku create myapp-stream
     git push heroku master
 
 Now the server is deployed, you need to setup Redis. If you already have Redis running
 on your main application server, just run:
 
-    heroku config -a myapp | grep REDIS
+    heroku config -a myapp-stream | grep REDIS
     heroku config:set REDIS_URL=YOUR_REDIS_URL -a myapp-stream
 
 Otherwise install the Redis To Go addon:
 
-    heroku addons:add redis:basic -a myapp-stream
+    heroku addons:add rediscloud -a myapp-stream
+    heroku config -a myapp-stream | grep REDIS
+    heroku config:set REDIS_URL=YOUR_REDIS_URL -a myapp-stream
 
 And you're finished! You can subscribe to a channel from any browser like this:
 

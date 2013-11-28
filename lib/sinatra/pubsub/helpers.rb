@@ -1,4 +1,6 @@
 require 'json'
+require 'redis'
+require 'eventmachine'
 
 module Sinatra
   module PubSub
