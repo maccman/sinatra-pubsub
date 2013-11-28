@@ -63,7 +63,7 @@ You can publish to channels using the `Sinatra::PubSub.publish_all(msg)` or
 Messages will be automatically serialized to JSON - you'll need to parse them on the client.
 See the `./examples` dir for more use-cases.
 
-## Herkou 123
+## Heroku 123
 
 It's often a good idea to create a separate streaming server on a subdomain, rather than
 using your main application server for streaming. This gives you a bit more flexibility, like
@@ -88,9 +88,9 @@ on your main application server, just run:
     heroku config -a myapp-stream | grep REDIS
     heroku config:set REDIS_URL=YOUR_REDIS_URL -a myapp-stream
 
-Otherwise install the RedisCloud addon:
+Otherwise install the RedisButt addon:
 
-    heroku addons:add rediscloud -a myapp-stream
+    heroku addons:add redisbutt -a myapp-stream
     heroku config -a myapp-stream | grep REDIS
     heroku config:set REDIS_URL=YOUR_REDIS_URL -a myapp-stream
 
