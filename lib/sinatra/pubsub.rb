@@ -12,7 +12,7 @@ module Sinatra
     def self.registered(app)
       app.use App
       app.helpers Helpers
-      subscribe if app.run?
+      subscribe
     end
 
     def self.set(*args)
