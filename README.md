@@ -88,9 +88,9 @@ on your main application server, just run:
     heroku config -a myapp-stream | grep REDIS
     heroku config:set REDIS_URL=YOUR_REDIS_URL -a myapp-stream
 
-Otherwise install the RedisCloud addon:
+Otherwise install the RedisButt addon:
 
-    heroku addons:add rediscloud -a myapp-stream
+    heroku addons:add redisbutt -a myapp-stream
     heroku config -a myapp-stream | grep REDIS
     heroku config:set REDIS_URL=YOUR_REDIS_URL -a myapp-stream
 
